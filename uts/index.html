@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pembayaran THR</title>
+</head>
+<body>
+    <h1>Perhitungan Pembayaran THR</h1>
+    <form id="thrform">
+        <label>Gaji Pokok</label><br>
+        <input type="number" id="gajiPokok"><br><br>
+
+        <label>Tunjangan Tetap</label><br>
+        <input type="number" id="tunjanganTetap"><br><br>
+
+        <label>Masa Kerja</label><br>
+        <input type="text" id="masaKerja"><br><br>
+
+        <button type="button" onclick="hitung()">Hitung</button>
+    </form>
+    <br>
+    <h3>Hasil Perhitungan</h3>
+    <p id="output">
+        THR: Rp 0 <br>
+        PPH: Rp 0 <br>
+        Total Pembayaran: Rp 0 <br>
+    </p>
+
+
+    <script>
+        function hitung() {
+            let gajiPokok = parseFloat(document.getElementById("gajiPokok").value || 0);
+            let tunjanganTetap = parseFloat(document.getElementById("tunjanganTetap").value || 0);
+            let totalGaji = gajiPokok+tunjanganTetap
+
+            let masaKerja = parseFloat(document.getElementById("masaKerja").value || 0);
+
+            let thr = 0;
+            if (masaKerja >= 12) thr = totalGaji;
+            else if (masaKerja < 12) thr = (masaKerja/12)*totalGaji;
+
+            let pph = 0;
+            if (totalGaji+ppn >= 4500000) pph = (totalGaji+ppn)*0.5;
+            else if (totalGaji+ppn <4500000) pph = 0;
+
+            let totalPembayaran = totalGaji+thr-pph;
+                document.getElementById("output").innerHTML = 
+                THR: Rp ${thr.toLocaleString()} <br> 
+                PPH: Rp ${pph.toLocaleString()} <br>
+                Total Pembayaran: Rp ${totalPembayaran.toLocaleString()} <br>';
+        }
+    </script>
+</body>
+</html>
